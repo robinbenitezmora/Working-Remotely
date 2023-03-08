@@ -7,7 +7,7 @@ module  Api
           name: place.name,
           city: place.city,
           most_recent_download_speed: most_recent_download_speed(place),
-          most_recent_download_unit: most_recent_download_unit(place),
+          most_recent_download_units: most_recent_download_units(place),
           amount_of_measurements: amount_of_measurements(place)
         }
       end
@@ -19,7 +19,7 @@ module  Api
       place.internet_speeds.order("created_at").last.download_speed
     end
 
-    def most_recent_download_unit(place)
+    def most_recent_download_units(place)
       place.internet_speeds.order("created_at").last.download_units
     end
 
