@@ -5,7 +5,19 @@ function PlacesList() {
   const [loading, setLoading] = useState(true);
   const [loadedPlaces, setLoadedPlaces] = useState([]);
 
+  useEffect(() => {
+    const apiEndpoint = "/api/places"
+    fetch(apiEndpoint)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      setLoadedPlaces(data["places"])
+      setLoading(false)
+    })
+  })
+
   const loadingSection = (<div>Loading...</div>);
+  console.log(loadedPlaces);
   const dataSection = loadedPlaces.map((place, index) => 
     <div key={index}>
       <table>
