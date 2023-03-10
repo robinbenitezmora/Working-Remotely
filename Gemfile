@@ -48,6 +48,9 @@ gem "bootsnap", require: false
 # Use jsbundling-rails to bundle JavaScript with esbuild [
   gem "jsbundling-rails"
 
+# Use cssbundling-rails to bundle CSS with esbuild [
+  gem "cssbundling-rails"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
