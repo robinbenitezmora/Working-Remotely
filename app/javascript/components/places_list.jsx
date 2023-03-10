@@ -13,8 +13,8 @@ function PlacesList() {
       console.log(data)
       setLoadedPlaces(data["places"])
       setLoading(false)
-    })
-  })
+    });
+  }, [])
 
   const loadingSection = (<div>Loading...</div>);
   console.log(loadedPlaces);
