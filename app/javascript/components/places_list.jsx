@@ -1,6 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import ReactDom from 'react-dom/client';
 
+function renderPlacesPage(body) {
+  return (
+    <div className="flex flex-wrap">
+      <div className="w-full mb-12 px-4">
+        <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-pink-800">
+          <div className="rounded-t mb-0 px-4 py-3 border-0">
+            <div className="flex flex-wrap items-center">
+              <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+                <h3 className="font-semibold text-lg text-white">New Log</h3>
+              </div>
+            </div>
+          </div>
+          {body}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function PlacesList() {
   const [loading, setLoading] = useState(true);
   const [loadedPlaces, setLoadedPlaces] = useState([]);
@@ -28,7 +47,7 @@ function PlacesList() {
                 <th className={tableHeaderClass}>Name</th>
                 <th className={tableHeaderClass}>City</th>
                 <th className={tableHeaderClass}>Recent Upload Speed</th>
-                <th className={tableHeaderClass}>Recent Upload Speed Unist</th>
+                <th className={tableHeaderClass}>Recent Upload Speed Units</th>
                 <th className={tableHeaderClass}>Amount of Measurements</th>
               </tr>
             </thead>
@@ -76,11 +95,11 @@ function PlacesList() {
   )
 
   if (loading) {
-    return loadingSection
+    return renderPage(loadingSection)
   } else {
-    return dataSection
+    return renderPlacesPage(dataSection)
   }
 }
 
-const placesList = ReactDOM.createRoot(document.getElementById("places-list-container"));
+const placesList = ReactDOM.createRoot(document.getElementById("page-places"));
 placesList.render(<PlacesList />);
