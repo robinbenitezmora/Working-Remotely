@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import ReactDom from 'react-dom/client';
 
-function renderPlacesPage(body) {
+function renderPlacesPage(body, onSearchTermChange, searchTerm) {
   return (
     <div className="flex flex-wrap">
       <div className="w-full mb-12 px-4">
         <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-pink-800">
           <div className="rounded-t mb-0 px-4 py-3 border-0">
             <div className="flex flex-wrap items-center">
+            <input
+              class="bg-gray-50 outline-none ml-1 block w"
+              type="text"
+              name='search_term'
+              id='search_term'
+              placeholder="Search"
+              onChange={onSearchTermChange}
+            />
               <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-                <h3 className="font-semibold text-lg text-white">New Log</h3>
+                <h3 className="font-semibold text-lg text-white">Places</h3>
+                <button className="bg-pink-600 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">New Log</button>
               </div>
             </div>
           </div>
@@ -23,9 +32,10 @@ function renderPlacesPage(body) {
 function PlacesList() {
   const [loading, setLoading] = useState(true);
   const [loadedPlaces, setLoadedPlaces] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
-    const apiEndpoint = "/api/places"
+    const apiEndpoint = `/api/places?search_term=${searchTerm}`
     fetch(apiEndpoint)
     .then(response => response.json())
     .then(data => {
@@ -33,7 +43,13 @@ function PlacesList() {
       setLoadedPlaces(data["places"])
       setLoading(false)
     });
-  }, [])
+  }, [searchText])
+
+  const onSearchTextChange = (e) => {
+    console.log(e.target.value)
+    setLoading(true)
+    setSearchText(e.target.value)
+  }  
 
   const loadingSection = (<div>Loading...</div>);
   const tableHeaderClass = "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-pink-800 text-pink-300 border-pink-800"
@@ -95,9 +111,9 @@ function PlacesList() {
   )
 
   if (loading) {
-    return renderPage(loadingSection)
+    return renderPlacesPage(loadingSection, onSearchTextChange, searchText)
   } else {
-    return renderPlacesPage(dataSection)
+    return renderPlacesPage(dataSection, onSearchTextChange, searchText)
   }
 }
 
