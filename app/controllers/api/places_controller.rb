@@ -9,7 +9,7 @@ module  Api
           most_recent_download_speed: most_recent_download_speed(place),
           most_recent_download_units: most_recent_download_units(place),
           amount_of_measurements: amount_of_measurements(place)
-        }
+        }.stringify_keys
       end
 
       render(json: { places: places })
@@ -31,7 +31,7 @@ module  Api
       if search_term.blank?
         Place.all
       else 
-        Place.where("name LIKE ? OR city LIKE ?", "%search_term%", "%search_term%")
+        Place.where("name LIKE :search_term OR city LIKE :search_term", search_term: "%#{search_term}%")
       end
     end
   end

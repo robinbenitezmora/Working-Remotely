@@ -1,6 +1,8 @@
 module Api
   class PlacesControllerTest < ActiveSupport::TestCase
     test " answers places the match search term if set" do
+      place = FactoryBot.create(:place)
+      binding.break
       assert true
     end
 
