@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDom from 'react-dom/client';
 
-function renderPlacesPage(body, onSearchTermChange, searchTerm) {
+function renderPlacesPage(body, onSearchTextChange) {
   return (
     <div className="flex flex-wrap">
       <div className="w-full mb-12 px-4">
@@ -14,7 +14,7 @@ function renderPlacesPage(body, onSearchTermChange, searchTerm) {
               name='search_term'
               id='search_term'
               placeholder="Search"
-              onChange={onSearchTermChange}
+              onChange={onSearchTextChange}
             />
               <div className="relative w-full px-4 max-w-full flex-grow flex-1">
                 <h3 className="font-semibold text-lg text-white">Places</h3>
