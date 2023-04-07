@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDom from 'react-dom/client';
+import { Link } from 'react-router-dom';
 
 function renderPlacesPage(body, onSearchTextChange) {
   return (
@@ -18,7 +19,9 @@ function renderPlacesPage(body, onSearchTextChange) {
             />
               <div className="relative w-full px-4 max-w-full flex-grow flex-1">
                 <h3 className="font-semibold text-lg text-white">Places</h3>
-                <button className="bg-pink-600 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">New Log</button>
+                <Link to="/new-internet-speed">
+                  <button className="bg-pink-600 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="submit">New Log</button>
+                </Link>
               </div>
             </div>
           </div>
@@ -29,7 +32,7 @@ function renderPlacesPage(body, onSearchTextChange) {
   )
 }
 
-function PlacesList() {
+export default function PlacesList() {
   const [loading, setLoading] = useState(true);
   const [loadedPlaces, setLoadedPlaces] = useState([]);
   const [searchText, setSearchText] = useState("");
