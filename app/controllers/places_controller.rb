@@ -1,6 +1,6 @@
 class PlacesController < ApplicationController
   def index
-    render "pages/places/index"
+    render "pages/react_app"
   end
 
   def show
