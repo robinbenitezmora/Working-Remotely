@@ -3,3 +3,4 @@
 // import "@hotwired/turbo-rails"
 // import "controllers"
 import "./components/places_list"
+import "./components/internet_speeds_new"

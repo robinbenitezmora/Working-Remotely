@@ -18,7 +18,9 @@ function renderPlacesPage(body, onSearchTextChange) {
             />
               <div className="relative w-full px-4 max-w-full flex-grow flex-1">
                 <h3 className="font-semibold text-lg text-white">Places</h3>
-                <button className="bg-pink-600 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">New Log</button>
+                <form action="/new-internet-speed" method="get">
+                  <button className="bg-pink-600 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="submit">New Log</button>
+                </form>
               </div>
             </div>
           </div>
