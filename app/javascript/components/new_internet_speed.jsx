@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ReactInternetSpeedMeter } from 'react-internet-meter';
 
 export default function NewInternetSpeed() {
   return (
@@ -37,6 +38,20 @@ export default function NewInternetSpeed() {
         type='button'
       >Start Speed Test
       </button>
-    </div></>
+    </div>
+    <ReactInternetSpeedMeter
+      txtSubHeading="Internet is too slow"
+      outputType="alert"
+      customClassName={null}
+      txtMainHeading="Oops!"
+      pingInterval={4000}
+      thresholdUnit="megabyte"
+      threshold={100}
+    imageUrls="https://res.cloudinary.com/dx9dnqzaj/image/upload/v1598450773/undraw_speed_test_wxl0.png"
+      downloadSize="178128"
+      callbacksFunctionOnNetworkDown={(speed) => console.log(`Internet speed is down ${speed}`)}
+      callbacksFunctionOnNetworkTest={(speed) => setwifiSpeed(speed)}
+    />
+    </>
   );
 }
