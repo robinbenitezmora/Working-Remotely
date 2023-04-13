@@ -54,83 +54,83 @@ export default function NewInternetSpeed() {
       }
     }
   }, [latestDownloadSpeed])
+
+  const placeFieldsMissing = placeName.length == 0 || placeCity.length == 0 || placeAddress.length == 0;
+  }
   
   return (
-    <><div>
-      <div className="rounded-t mb-0 px-4 py-3 border-0">
-        <div className="flex flex-wrap items-center justify-between pb-6">
-          <div>
-            <h2 className="text-4xl text-gray-600 font-semibold">Log Internet Speed</h2>
+    <div className="container">
+      <div>
+        <div className="rounded-t mb-0 px-4 py-3 border-0">
+          <div className="flex flex-wrap items-center justify-between pb-6">
+            <div>
+              <h2 className="text-4xl text-gray-600 font-semibold">Log Internet Speed</h2>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="md:ml-2 mt-2 w-96">
-        <label className='block mb-2 text-sm font-bold text-gray-700'>
-          Place Name
-        </label>
-        <input
-          className='w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
-          id='placeName'
-          type='text'
-          placeholder='placeName'
-          onChange={(e) => setPlaceName(e.target.value)}
-          />
-      </div>
-      <div className="md:ml-2 mt-2 w-96">
-        <label className='block mb-2 text-sm font-bold text-gray-700'>
-          Address
-        </label>
-        <input
-          className='w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
-          id='address'
-          type='text'
-          placeholder='Address'
-          onChange={(e) => setPlaceAddress(e.target.value)}
-        />
-      </div>
-      <div className="md:ml-2 mt-2 w-96">
-        <label className='block mb-2 text-sm font-bold text-gray-700'>
-          City
-        </label>
-        <input
-          className='w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
-          id='city'
-          type='text'
-          placeholder='City'
-          onChange={(e) => setPlaceCity(e.target.value)}
-        />
-      </div>
+        <div className="md:ml-2 mt-2 w-96">
+          <label className='block mb-2 text-sm font-bold text-gray-700'>
+            Place Name
+          </label>
+          <input
+            className='w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
+            id='placeName'
+            type='text'
+            placeholder='placeName'
+            onChange={(e) => setPlaceName(e.target.value)} />
+        </div>
+        <div className="md:ml-2 mt-2 w-96">
+          <label className='block mb-2 text-sm font-bold text-gray-700'>
+            Address
+          </label>
+          <input
+            className='w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
+            id='address'
+            type='text'
+            placeholder='Address'
+            onChange={(e) => setPlaceAddress(e.target.value)} />
+        </div>
+        <div className="md:ml-2 mt-2 w-96">
+          <label className='block mb-2 text-sm font-bold text-gray-700'>
+            City
+          </label>
+          <input
+            className='w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline'
+            id='city'
+            type='text'
+            placeholder='City'
+            onChange={(e) => setPlaceCity(e.target.value)} />
+        </div>
     </div>
     <div className='md:ml-2 mt-4 w96 text-center'>
-      {testInProgress && 
-      <div>
-        <div>Testing... </div>
-        <ReactInternetSpeedMeter
-        txtSubHeading="Internet is too slow"
-        outputType="alert"
-        customClassName={null}
-        txtMainHeading="Oops!"
-        pingInterval={SPEED_TEST_PING_INTERVAL}
-        thresholdUnit="megabyte"
-        threshold={0}
-      imageUrls="https://cdn.speedcheck.org/images/reviews/google-speed-test-mobile.jpg"
-        downloadSize="157000"
-        callbacksFunctionOnNetworkTest={(speed) => setLatestDownloadSpeed(speed)}
-      />
+        {testInProgress &&
+          <div>
+            <div>Testing... </div>
+            <ReactInternetSpeedMeter
+              txtSubHeading="Internet is too slow"
+              outputType="alert"
+              customClassName={null}
+              txtMainHeading="Oops!"
+              pingInterval={SPEED_TEST_PING_INTERVAL}
+              thresholdUnit="megabyte"
+              threshold={0}
+              imageUrls="https://cdn.speedcheck.org/images/reviews/google-speed-test-mobile.jpg"
+              downloadSize="157000"
+              callbacksFunctionOnNetworkTest={(speed) => setLatestDownloadSpeed(speed)} 
+            />
+          </div>
+        }
+        {!testInProgress && downloadSpeeds.length == 0 && (
+          <button
+            disabled={placeFieldsMissing}
+            className='w-full px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline'
+            type='button'
+            onClick={() => setTestInProgress(true)}
+          >
+            Start Speed Test
+          </button>
+        )}
       </div>
-      }
-
-      {!testInProgress && downloadSpeeds.length == 0 && (
-        <button
-          className='w-full px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline'
-          type='button'
-          onClick={() => setTestInProgress(true)}
-        >
-        Start Speed Test
-        </button>
-      )}
-
     </div>
-    </>
   );
 }
